@@ -1,0 +1,29 @@
+
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(òâ»Ê8®åðÅ†,
+msquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.( Ï‹žüÿÿÿÿ
+…"squid:ClassVariableVisibilityCheck"TMake executor a static final constant or non-public and provide accessors if needed.(òÃá¤þÿÿÿÿ
+Hsquid:S1313".Make this IP "127.0.0.1" address configurable.(™ÅÐÍýÿÿÿÿ
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¤®Ý”ýÿÿÿÿ8é€òÈ†,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Üëô÷ùÿÿÿÿ8¶ã÷Å†,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ø¬½‡ùÿÿÿÿ8Þ‹ïÅ†,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ë¢µúÿÿÿÿ8ÿÍ©È†,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‡œß8ñþƒÈ†,
+Csquid:S1444")Make this "public static dos" field final(¯äÛáÿÿÿÿÿ
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Îºàžùÿÿÿÿ8žúôÅ†,
+Ž"squid:ClassVariableVisibilityCheck"]Make serverovskeSokety a static final constant or non-public and provide accessors if needed.(ùÆÍ¸ùÿÿÿÿ
+nsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(œû¿Ø8´×ãÉ†,
+1squid:S1220""Move this file to a named package.
+fsquid:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(£ôªø8ÓªÆ†,
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(’Ó€ûýÿÿÿÿ8ìôõÈ†,
+Csquid:S2189""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ8´×ãÉ†,
+Qsquid:S1444"7Make this "public static serverovskeSokety" field final(ùÆÍ¸ùÿÿÿÿ
+€"squid:ClassVariableVisibilityCheck"OMake dos a static final constant or non-public and provide accessors if needed.(¯äÛáÿÿÿÿÿ
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÂÀ‚×üÿÿÿÿ8æ†úÈ†,
+Hsquid:S2386",Make member "serverovskeSokety" "protected".(ÆŸš—8â¨õÅ†,
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¡Ñ¤Ù8Õ«ôÈ†,
+hsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(È´‡
+Hsquid:S1444".Make this "public static executor" field final(òÃá¤þÿÿÿÿ
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(îÛ¬ê8ùóÈ†,

@@ -1,0 +1,19 @@
+
+=squid:S1481"(Remove this unused "fis" local variable.(…Üê¦
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+¯%squid:RedundantThrowsDeclarationCheck"{Remove the declaration of thrown exception 'java.io.FileNotFoundException', as it cannot be thrown from constructor's body.(É§ÊÒýÿÿÿÿ
+Dsquid:S1068"*Remove this unused "socket" private field.(Å’¬Úþÿÿÿÿ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(²ý¿ù8£à“Æ†,
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(á¤·¯
+csquid:S2095"NUse try-with-resources or close this "RandomAccessFile" in a "finally" clause.(®ó³Ö
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(â«Ûìüÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ñìšüøÿÿÿÿ
+=squid:S1481"(Remove this unused "bis" local variable.(Ž¯Ž¥
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ØÅþÇ
+1squid:S1220""Move this file to a named package.
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÈÁµ¬ýÿÿÿÿ
+Zsquid:HiddenFieldCheck":Rename "socket" which hides the field declared at line 13.(Ü˜Ââ
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÇÍí—ýÿÿÿÿ

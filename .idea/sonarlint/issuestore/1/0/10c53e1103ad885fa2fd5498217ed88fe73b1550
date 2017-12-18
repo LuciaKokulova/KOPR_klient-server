@@ -1,0 +1,16 @@
+
+}"squid:ClassVariableVisibilityCheck"QMake panel a static final constant or non-public and provide accessors if needed.(á‘ß«
+Y
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ÿìû‚øÿÿÿÿ8â±¹Ç†,
+Dsquid:S1148"#Use a logger to log this exception.(Âþÿâûÿÿÿÿ8â±¹Ç†,
+Jsquid:S1068"5Remove this unused "ipAdresaTextField" private field.(àÌü€
+Osquid:S1068"5Remove this unused "pocetSoketovLabel" private field.(„åà‹üÿÿÿÿ
+1squid:S1220""Move this file to a named package.
+Isquid:S1604"(Make this anonymous inner class a lambda(ôž²Óøÿÿÿÿ8â±¹Ç†,
+Nsquid:S1068"4Remove this unused "popisProgressBar" private field.(©Ò‚€ùÿÿÿÿ
+Isquid:S1604"(Make this anonymous inner class a lambda(Äó›Šùÿÿÿÿ8â±¹Ç†,
+Isquid:S1604"(Make this anonymous inner class a lambda(š¡³…ýÿÿÿÿ8â±¹Ç†,
+[squid:S1161":Add the "@Override" annotation above this method signature(ÒýÝêýÿÿÿÿ8â±¹Ç†,
+Dsquid:S1148"#Use a logger to log this exception.(Âþÿâûÿÿÿÿ8â±¹Ç†,
+Isquid:S1604"(Make this anonymous inner class a lambda(—ÇéËýÿÿÿÿ8â±¹Ç†,
+hsquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(Ÿ‹ùÍúÿÿÿÿ

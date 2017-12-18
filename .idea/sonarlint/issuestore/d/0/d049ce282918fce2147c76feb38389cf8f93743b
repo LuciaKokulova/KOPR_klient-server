@@ -1,0 +1,16 @@
+
+T
+squid:S106"9Replace this use of System.out or System.err by a logger.(÷“Ÿ8„‹ÎÈ†,
+Lsquid:S1197"8Move the array designator from the variable to the type.(Üëo
+?squid:S1068"*Remove this unused "offset" private field.(Ì¹ˆÙ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‡Ã«Ã8„‹ÎÈ†,
+R
+squid:S106"9Replace this use of System.out or System.err by a logger.(—â©¨şÿÿÿÿ
+"squid:ClassVariableVisibilityCheck"UMake precitane a static final constant or non-public and provide accessors if needed.(Í§”¿üÿÿÿÿ8ª›¡Ç†,
+Tsquid:UselessImportCheck"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8„‹ÎÈ†,
+Fsquid:S00108")Either remove or fill this block of code.(‚ß¨Æ8„‹ÎÈ†,
+1squid:S1220""Move this file to a named package.
+Psquid:S1444"/Make this "public static precitane" field final(Í§”¿üÿÿÿÿ8ª›¡Ç†,
+Rsquid:S2696"6Make the enclosing method "static" or remove this set.(ìİö8„‹ÎÈ†,
+hsquid:S2095"NUse try-with-resources or close this "RandomAccessFile" in a "finally" clause.(à”ô…úÿÿÿÿ
