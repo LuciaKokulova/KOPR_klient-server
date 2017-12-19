@@ -122,12 +122,13 @@ public class Klient {
             for (int i = 0; i < offsety.length; i++) {
                 offsety[i] = scanner.nextInt();
             }
-            //System.out.println("Offsety su " + Arrays.toString(offsety));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch(IOException e1) {
-            e1.printStackTrace();
-        } finally {
+//        } catch (NoSuchElementException e2) {
+//            System.err.println("Ak chceš pokračovať v sťahovaní musíš najprv nejaké začať :-)");
+
+        }
+        finally {
             scanner.close();
         }
 

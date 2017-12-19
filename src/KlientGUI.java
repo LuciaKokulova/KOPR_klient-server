@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +12,7 @@ import java.util.Scanner;
  * @author Lucia Kokulova
  */
 public class KlientGUI extends JFrame {
+
     private JProgressBar progressBar;
     private JButton pokracovatButton;
     private JLabel popisProgressBar;
@@ -24,6 +23,7 @@ public class KlientGUI extends JFrame {
     private JButton spustitButton;
     private JButton prerusitButton;
     public JPanel panel;
+    private JLabel posielanySuborJLabel;
 
 
     public KlientGUI() {
@@ -75,6 +75,7 @@ public class KlientGUI extends JFrame {
                 try {
                     prerusitButton.setEnabled(true);
                     zrusitButton.setEnabled(true);
+                    posielanySuborJLabel.setText("Posiela sa súbor '" + new File(Server.SUBOR_NA_ODOSLANIE).getName() + "'.");
                     Klient.spusti(new int[(int) pocetSoketovSpinner.getValue()]);
                     worker.execute();
                 } catch (IOException e1) {
@@ -115,21 +116,6 @@ public class KlientGUI extends JFrame {
                 }
             }
         });
-
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we)
-            {
-                String ObjButtons[] = {"Yes","No"};
-                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
-                if(PromptResult==JOptionPane.YES_OPTION)
-                {
-                    System.exit(0);
-                }
-            }
-        });
-
     }
 
     public static void changeFont(Component component, Font font) {
@@ -165,5 +151,31 @@ public class KlientGUI extends JFrame {
         return sucet;
     }
 
+    //        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//        addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent we)
+//            {
+//                String ObjButtons[] = {"Yes","No"};
+//                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+//                if(PromptResult==JOptionPane.YES_OPTION)
+//                {
+//                    System.exit(0);
+//                }
+//            }
+//        });
+
+//        vybraťButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                int hodnota = prehliadac.showOpenDialog(frame);
+//                if (hodnota == JFileChooser.APPROVE_OPTION) {
+//                    File subor = prehliadac.getSelectedFile();
+//                    //vybranyNazovLabel.setText(subor.getAbsolutePath());
+//                    //startButton.setEnabled(true);
+//                    Server server = new Server();
+//                }
+//            }
+//        });
 
 }
