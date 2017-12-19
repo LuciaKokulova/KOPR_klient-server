@@ -2,12 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Lucia Kokulova
+ */
 public class KlientGUI extends JFrame {
     private JProgressBar progressBar;
     private JButton pokracovatButton;
@@ -22,20 +27,24 @@ public class KlientGUI extends JFrame {
 
 
     public KlientGUI() {
-
         progressBar.setMinimum(0);
         progressBar.setMaximum((int) new File(Server.SUBOR_NA_ODOSLANIE).length());
         progressBar.setValue(0);
 
+        ipAdresaTextField.setText("127.0.0.1");
+
         pocetSoketovSpinner.setValue(3);
 
-        progressBar.setValue(nastavProgressbar());
+        //progressBar.setValue(nastavProgressbar());
+
+        prerusitButton.setEnabled(false);
+        zrusitButton.setEnabled(false);
 
         SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
             @Override
             protected Void doInBackground() throws Exception {
 
-                System.out.println("Zacinam s progress barom");
+                System.out.println("Začínam s progress barom.");
                 while (Klient.pocitadlo.getCount() >= 0) {
                     int[] prijateByty = Klient.prijateByty;
                     if(prijateByty == null) continue;
@@ -55,7 +64,7 @@ public class KlientGUI extends JFrame {
 
             @Override
             protected void done() {
-                System.out.println("Done.");
+                System.out.println("Koniec sťahovania.");
             }
         };
 
@@ -64,8 +73,9 @@ public class KlientGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    prerusitButton.setEnabled(true);
+                    zrusitButton.setEnabled(true);
                     Klient.spusti(new int[(int) pocetSoketovSpinner.getValue()]);
-
                     worker.execute();
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -76,6 +86,9 @@ public class KlientGUI extends JFrame {
         zrusitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                spustitButton.setEnabled(true);
+                prerusitButton.setEnabled(false);
+                pokracovatButton.setEnabled(false);
                 Klient.zrusit();
             }
         });
@@ -83,6 +96,7 @@ public class KlientGUI extends JFrame {
         prerusitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                spustitButton.setEnabled(false);
                 Klient.prerus();
             }
         });
@@ -91,14 +105,31 @@ public class KlientGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    spustitButton.setEnabled(false);
+                    zrusitButton.setEnabled(true);
+                    progressBar.setValue(nastavProgressbar());
                     Klient.pokracuj((int) pocetSoketovSpinner.getValue());
-
                     worker.execute();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             }
         });
+
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we)
+            {
+                String ObjButtons[] = {"Yes","No"};
+                int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Online Examination System",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                if(PromptResult==JOptionPane.YES_OPTION)
+                {
+                    System.exit(0);
+                }
+            }
+        });
+
     }
 
     public static void changeFont(Component component, Font font) {
@@ -114,18 +145,23 @@ public class KlientGUI extends JFrame {
         Scanner scanner = null;
         int sucet = 0;
         File file = new File("subor.txt");
+        if (!file.exists()) {
+            return 0;
+        }
         try {
             scanner = new Scanner(file);
             while (scanner.hasNextInt()) {
                 sucet += scanner.nextInt();
-            }} catch (FileNotFoundException e) {
-            e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            return 0;
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            scanner.close();
+            if (scanner != null) {
+                scanner.close();
+            }
         }
-
         return sucet;
     }
 

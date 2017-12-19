@@ -8,6 +8,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author Lucia Kokulova
+ */
 public class Klient {
     public static ExecutorService executor;
     public static int[] offsety;
@@ -30,20 +33,19 @@ public class Klient {
             KlientGUI.changeFont(frame, font);
             frame.pack();
             frame.setVisible(true);
-
         });
 
         socket = new Socket(Server.SERVER_IP, Server.SERVER_PORT);
         dosKomunikacia = new DataOutputStream(socket.getOutputStream());
-        System.out.println("Klient pripojeny na IP: " + socket.getInetAddress() + " ,porte: " + socket.getPort());
+        System.out.println("Klient sa pripája na IP: " + socket.getInetAddress() + ", port: " + socket.getPort());
     }
 
     public static void spusti(int[] offsetyZGUI) throws IOException {
-        System.out.println("Zacina sa posielat subor od zaciatku ....");
+        System.out.println("Začína sa posielať súbor od offsetov: " + Arrays.toString(offsetyZGUI));
         offsety = offsetyZGUI;
         int pocetTCPSpojeni = offsety.length;
 
-        System.out.println("Posielam serveru spravu " + 0 + ", pocetTCP " + pocetTCPSpojeni + " ....");
+        System.out.println("Posielam serveru správu " + 0 + ", počet vlákien je " + pocetTCPSpojeni);
         dosKomunikacia.writeInt(0);
         dosKomunikacia.writeInt(pocetTCPSpojeni);
         dosKomunikacia.flush();
@@ -55,12 +57,12 @@ public class Klient {
         int prvyPort = dis.readInt();
         int velkostNazvu = dis.readInt();
 
-        System.out.println("Subor ma velkost " + velkostSuboru + ", posiela sa na porte " + port + ", prvy port je " + prvyPort + " ....");
+        System.out.println("Súbor ma veľkosť " + velkostSuboru + ", komunikuje sa na porte " + port + ", prvý port na prenos je " + prvyPort);
 
         nazov = dis.readUTF();
         cesta = "C:\\Users\\lucka\\Desktop\\Nový priečinok\\" + nazov;
 
-        System.out.println("Nazov suboru je " + nazov + ", cesta k nemu je " + cesta + " ....");
+        System.out.println("Názov súboru je " + nazov + ", cesta k nemu je " + cesta);
 
         pocitadlo = new CountDownLatch(pocetTCPSpojeni);
         prijateByty = new int[pocetTCPSpojeni];
@@ -70,7 +72,7 @@ public class Klient {
             int velkostCasti = (int) Math.ceil((double) velkostSuboru/pocetTCPSpojeni);
             executor = Executors.newFixedThreadPool(pocetTCPSpojeni);
 
-            System.out.println("Velkost casti je " + velkostCasti);
+            System.out.println("Veľkosť jednej posielanej časti je " + velkostCasti);
 
             for (int i = 0; i < pocetTCPSpojeni; i++) {
                 executor.execute(new TCPKlient(i, file, velkostCasti, prvyPort + i , offsety, prijateByty));
@@ -90,7 +92,7 @@ public class Klient {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(file);
-            System.out.println("V preruseni zapisujem do suboru offsety " + Arrays.toString(offsety));
+            System.out.println("V prerušení zapisujem do súboru offsety " + Arrays.toString(offsety));
             for (int i = 0; i < offsety.length; i++) {
                 pw.println(offsety[i]);
             }
@@ -106,16 +108,21 @@ public class Klient {
             offsety = new int[pocet];
         }
 
-        System.out.println("Spustila sa metoda pokracuj s offsetmmi " + Arrays.toString(offsety));
+        System.out.println("Pokračujem posielať s offsetmi " + Arrays.toString(offsety));
 
         Scanner scanner = null;
         File file = new File("subor.txt");
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
         try {
             scanner = new Scanner(file);
             for (int i = 0; i < offsety.length; i++) {
                 offsety[i] = scanner.nextInt();
             }
-            System.out.println("Offsety su " + Arrays.toString(offsety));
+            //System.out.println("Offsety su " + Arrays.toString(offsety));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch(IOException e1) {
@@ -124,14 +131,13 @@ public class Klient {
             scanner.close();
         }
 
-
-        System.out.println("Posielam spravu " + 1 + ", pocet spojeni je " + pocet + " ....");
+        System.out.println("Posielam správu " + 1 + ", počet vlákien je " + pocet);
         dosKomunikacia.writeInt(1);
         dosKomunikacia.writeInt(pocet);
         for (int i = 0; i < offsety.length; i++) {
             dosKomunikacia.writeInt(offsety[i]);
         }
-         System.out.println("posielam z klienta offsety " + Arrays.toString(offsety) + " a spustam metodu spusti....");
+         System.out.println("Posielam z klienta offsety " + Arrays.toString(offsety) + " a spúšťam prijímanie súboru.");
         dosKomunikacia.flush();
 
         spusti(offsety);
@@ -139,10 +145,23 @@ public class Klient {
 
     public static void zrusit() {
         executor.shutdownNow();
-        System.out.println("Exekutor je vypnuty a mazem subor " + cesta);
-        File file = new File(cesta);
-        System.out.println(cesta);
-        file.delete();
+//        try {
+            System.out.println("Mažem súbor " + cesta + " a " + "subor.txt");
+
+            File file = new File(cesta);
+            //System.out.println(cesta);
+            file.delete();
+
+            File file2 = new File("subor.txt");
+            file2.delete();
+
+        for (int i = 0; i < Klient.prijateByty.length; i++) {
+            Klient.prijateByty[i] = 0;
+        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
 }

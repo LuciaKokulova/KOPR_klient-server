@@ -6,13 +6,15 @@ import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author Lucia Kokulova
+ */
 public class Server {
     public final static int SERVER_PORT = 5555;
     public final static int INITIAL_PORT = 7000;
     public static final String SERVER_IP = "127.0.0.1";
     public static final String
             SUBOR_NA_ODOSLANIE = "C:\\Users\\lucka\\Desktop\\film.avi";
-    public static ServerSocket[] serverovskeSokety;
 
     public static DataOutputStream dos;
     public static ExecutorService executor = null;
@@ -29,8 +31,8 @@ public class Server {
 
         dos.flush();
 
-        System.out.println("Odoslane data: { Velkost suboru: " + velkostSuboru + " ,Server port: " + SERVER_PORT +
-                " , Initial port: " + INITIAL_PORT + " nazov suboru: " + subor + " }");
+        System.out.println("Odoslané dáta klientovi: veľkosť súboru: " + velkostSuboru + ", server port: " + SERVER_PORT +
+                ", prvý port: " + INITIAL_PORT + ", súbor: " + SUBOR_NA_ODOSLANIE);
 
         try {
             executor = Executors.newFixedThreadPool(pocetTCPspojeni);
@@ -46,44 +48,43 @@ public class Server {
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
-        System.out.println("Cakam klienta na porte: " + SERVER_PORT + " ....");
+        System.out.println("Čakam klienta na porte: " + SERVER_PORT);
         while (true) {
             Socket accept = serverSocket.accept();
-            System.out.println("Pripojil sa klient na ipecke: " + accept.getInetAddress() + " a porte: " + accept.getPort() + " ....");
+            System.out.println("Pripojil sa klient na IP: " + accept.getInetAddress() + " a porte: " + accept.getPort() + ".");
 
             dos = new DataOutputStream(accept.getOutputStream());
             DataInputStream disKomunikacia = new DataInputStream(accept.getInputStream());
-            System.out.println("Otvaram komunikaciu ....");
+            System.out.println("Začínam komunikáciu.");
 
             while (accept.isConnected()) {
                 try {
 
                     int sprava = disKomunikacia.readInt();
-                    System.out.println("Sprava od klienta: \"" + sprava + "\"");
+                    System.out.println("Správa od klienta: \"" + sprava + "\"");
 
                     if (sprava == 0) {
-                        System.out.println("Zacinam posielat subor od zaciatku ....");
+                        System.out.println("Začínam posielať súbor od začiatku.");
                         int pocetTCPspojeni = disKomunikacia.readInt();
-                        System.out.println("Budem posielat subor cez: " + pocetTCPspojeni + " tcp spojeni");
+                        System.out.println("Budem posielať súbor cez: " + pocetTCPspojeni + " TCP spojení.");
 
                         sendFile(new int[pocetTCPspojeni]);
                     }
 
                     if (sprava == 1) {
-                        System.out.println("Pokracujem v posielani suboru");
+                        System.out.println("Pokračujem v posielaní súboru.");
                         int pocetTCPspojeni = disKomunikacia.readInt();
-                        System.out.println("Budem pokracovat subor cez: " + pocetTCPspojeni + " tcp spojeni");
+                        System.out.println("Znovu posielam cez: " + pocetTCPspojeni + " TCP spojení.");
                         int[] offsety = new int[pocetTCPspojeni];
                         for (int i = 0; i < pocetTCPspojeni; i++) {
                             offsety[i] = disKomunikacia.readInt();
                         }
-                        System.out.println("Odoslane offsety: " + Arrays.toString(offsety));
+                        System.out.println("Posielam s offsetmi: " + Arrays.toString(offsety));
                         sendFile(offsety);
                     }
 
                 } catch (SocketException e) {
-                    //accept.close();
-                    //executor.shutdownNow();
+
                 }
             }
             //System.out.println("server closed");

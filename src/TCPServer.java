@@ -53,15 +53,15 @@ public class TCPServer implements Runnable {
             os.flush();
 
         } catch (SocketException se) {
-            System.err.println("Vlakno bolo prerusene " + id);
+            System.err.println("Vlákno " + id + " bolo prerušené. ");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (serverovskySoket != null) {
                 try {
-                    System.out.println("zatvaram serverovsky " + port);
+                    System.out.println("Zatvára sa serverovský socket na porte " + port);
                     serverovskySoket.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

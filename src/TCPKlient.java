@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
 
 /**
  * @author Lucia Kokulova
@@ -53,13 +52,18 @@ public class TCPKlient implements Runnable {
             Klient.pocitadlo.countDown();
 
             if (Klient.pocitadlo.getCount() == 0) {
-                System.out.println("Koniec vsetkych posielajucich tcp spojeni.");
+                System.out.println("Koniec všetkých posielajúcich TCP spojení.");
+//                File subor = new File("subor.txt");
+//                if (subor.exists() && subor.isFile()) {
+//                    subor.delete();
+//                }
+                //subor.createNewFile();
             }
             raf.close();
             socket.close();
 
         } catch (SocketException s) {
-
+            System.err.println("Vlakno " + i + " bolo prerusene.");
         } catch (IOException e) {
             e.printStackTrace();
         }
